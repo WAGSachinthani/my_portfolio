@@ -1,0 +1,305 @@
+/* Modern Design System Tokens */
+:root {
+    --primary: #7C3AED;
+    --primary-glow: rgba(124, 58, 237, 0.5);
+    --secondary: #EC4899;
+    --dark: #0F172A;
+    --dark-lighter: #1E293B;
+    --light: #F8FAFC;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(12px);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--dark);
+    color: var(--light);
+    overflow-x: hidden;
+}
+
+/* Glassmorphism Classes */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+}
+
+/* Navbar Modernization */
+.navbar {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: var(--transition);
+}
+
+.navbar-brand h1 {
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin: 0 10px;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* Hero Section */
+#home {
+    background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.1), transparent),
+                radial-gradient(circle at bottom left, rgba(236, 72, 153, 0.1), transparent);
+}
+
+.hero-img-container {
+    position: relative;
+}
+
+.hero-img-container::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(40px);
+    opacity: 0.3;
+    animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.05); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0.3; }
+}
+
+/* Cards & Sections */
+.project-card {
+    background: var(--dark-lighter);
+    border: 1px solid var(--glass-border);
+    transition: var(--transition);
+    overflow: hidden;
+    position: relative;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, 0px);
+    left: var(--mouse-x, 0px);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--primary-glow), transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: var(--primary);
+}
+
+.project-thumbnail img:hover {
+    transform: scale(1.1);
+}
+
+
+.service-icon {
+    background: linear-gradient(45deg, var(--primary), var(--secondary)) !important;
+    border-radius: 12px !important;
+    transition: var(--transition);
+}
+
+/* Progress Bars */
+.progress {
+    height: 10px;
+    background: var(--dark-lighter);
+    border-radius: 20px;
+    overflow: visible;
+}
+
+.progress-bar {
+    border-radius: 20px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+    position: relative;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--primary);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    border-radius: 12px;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* Typography Overrides */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--light) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary) !important;
+}
+
+.display-1 {
+    opacity: 0.1;
+}
+
+/* Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Section Header Styles */
+.display-1 {
+    font-size: 8rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    color: transparent !important;
+    -webkit-text-stroke: 1px var(--glass-border) !important;
+    letter-spacing: 15px;
+    opacity: 0.1 !important;
+}
+
+.section-title {
+    position: absolute;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--primary) !important;
+    letter-spacing: 2px;
+}
+
+/* About Section */
+#about img {
+    border: 1px solid var(--glass-border);
+    padding: 10px;
+    background: var(--glass-bg);
+}
+
+/* Qualification Section */
+.border-left {
+    border-left: 2px solid var(--glass-border) !important;
+}
+
+.qualification-item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+.qualification-item::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+/* Footer */
+footer {
+    background: var(--dark-lighter) !important;
+    border-top: 1px solid var(--glass-border);
+}
+
+.btn-social {
+    background: var(--glass-bg) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--primary) !important;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px !important;
+    transition: var(--transition);
+}
+
+.btn-social:hover {
+    background: var(--primary) !important;
+    color: #fff !important;
+    transform: translateY(-5px);
+}
+
